@@ -3,14 +3,13 @@ This is a social media application built using Django and Python. It provides us
 
 ## Features
 
-- User Registration: Users can create an account by providing their username, email, and password.
-- User Authentication: Secure authentication system to protect user accounts and data.
-- User Profile: Users can create and manage their profiles, including adding a profile picture and updating personal information.
-- Friends: Users can connect with other users by sending and accepting friend requests.
-- News Feed: Users can view a personalized news feed that displays posts from their friends.
-- Post Creation: Users can create and share posts, including text, images, and videos.
-- Like and Comment: Users can interact with posts by liking and commenting on them.
-- Search: Users can search for other users and posts based on usernames or keywords.
+-User Registration and Authentication
+-User Profile Management
+-Create, Edit, and Delete Posts
+-Like and Comment on Posts
+-Follow and Unfollow Other Users
+-Account Settings
+
 
 ## Installation
 

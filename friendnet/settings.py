@@ -52,7 +52,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'project4.urls'
+ROOT_URLCONF = 'friendnet.urls'
 
 TEMPLATES = [
     {
@@ -70,7 +70,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'project4.wsgi.application'
+WSGI_APPLICATION = 'friendnet.wsgi.application'
 
 
 # Database
@@ -124,3 +124,10 @@ USE_TZ = True
 STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'network/media')
 MEDIA_URL = '/media/'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = str(os.getenv('EMAIL_HOST_USER'))
+EMAIL_HOST_PASSWORD = str(os.getenv('EMAIL_HOST_PASSWORD'))

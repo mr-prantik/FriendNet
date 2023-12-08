@@ -17,7 +17,7 @@ This is a social media application built using Django and Python. It provides us
 
 + Clone the repository
   ```
-  git clone git@github.com:mr-prantik/FriendNet.git
+  git clone git@github.com:your-username/FriendNet.git
   ```
   
 + Install the requirements

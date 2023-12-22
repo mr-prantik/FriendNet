@@ -18,6 +18,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['.vercel.app']
 
+WSGI_APPLICATION = 'friendnet.wsgi.app'
 
 # Application definition
 

@@ -1,7 +1,7 @@
 # FriendNet
 This is a social media application built using Django and Python. It provides users with the ability to create accounts, connect with friends, share posts, and interact with each other's content.
 
-![friendnet homepage](https://drive.google.com/file/d/166WEwJKItHrGDkdsTmi4y1Es7lTa0jHf/view?usp=sharing)
+![friendnet homepage](./media/friendnet_homepage.png)
 
 
 ## Features

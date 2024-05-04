@@ -12,7 +12,7 @@ SECRET_KEY = str(os.getenv('SECRET_KEY'))
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['.vercel.app']
+ALLOWED_HOSTS = []
 
 WSGI_APPLICATION = 'friendnet.wsgi.app'
 

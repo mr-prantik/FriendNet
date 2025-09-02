@@ -9,7 +9,9 @@ import dj_database_url
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = str(os.getenv('SECRET_KEY'))
+SECRET_KEY = os.getenv("SECRET_KEY")
+
+DATABASE_URL = os.getenv("DATABASE_URL")
 
 
 DEBUG = True
@@ -31,6 +33,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -64,31 +67,30 @@ WSGI_APPLICATION = 'friendnet.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
-
-# DATABASES = {
-#     'default': dj_database_url.config(      
-#         # Replace this value with your local database's connection string.   
-#         default='postgresql://postgres:postgres@localhost:5432/mysite',    
-#         conn_max_age=600    
-#     )
-# }
-
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': str(os.getenv('DB_NAME')),
-#         'USER': str(os.getenv('DB_USER')),
-#         'PASSWORD': str(os.getenv('DB_PASS')),
-#         'HOST': str(os.getenv('DB_HOST')),
-#         'PORT': str(os.getenv('DB_PORT'))
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 #     }
 # }
+
+
+if DATABASE_URL:
+    DATABASES = {
+        "default": dj_database_url.parse(DATABASE_URL, conn_max_age=600, ssl_require=True)
+    }
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": os.getenv("DB_NAME"),
+            "USER": os.getenv("DB_USER"),
+            "PASSWORD": os.getenv("DB_PASSWORD"),
+            "HOST": os.getenv("DB_HOST", "localhost"),
+            "PORT": os.getenv("DB_PORT", "5432"),
+        }
+    }
+
 
 
 AUTH_USER_MODEL = "network.User"
@@ -129,8 +131,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-STATIC_URL = '/static/'
-STATIC_ROOT= os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = "/static/"
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+MIDDLEWARE.insert(1, "whitenoise.middleware.WhiteNoiseMiddleware")
 MEDIA_ROOT = os.path.join(BASE_DIR, 'network/media')
 MEDIA_URL = '/media/'
 
@@ -140,3 +144,5 @@ EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = str(os.getenv('EMAIL_HOST_USER'))
 EMAIL_HOST_PASSWORD = str(os.getenv('EMAIL_HOST_PASSWORD'))
+
+
